@@ -43,14 +43,14 @@ object DER {
       //hash join and also record the non-matched ones
       var i: Long = 0
       for ((key, value) <- m.iterator)
-      yield {
-        i += 1
-        var value1 = table.getOrElse(key, null)
-        if (value1 == null)
-          (i, None) //non-matched
-        else
-          (key, (value, value1)) //matched
-      }
+        yield {
+          i += 1
+          var value1 = table.getOrElse(key, null)
+          if (value1 == null)
+            (i, None) //non-matched
+          else
+            (key, (value, value1)) //matched
+        }
     })
 
     //the matched results

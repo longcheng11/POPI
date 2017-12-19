@@ -16,7 +16,7 @@ object ROJA {
     }
 
     var join = r_pairs.leftOuterJoin(s_pairs)
-    println("Hash number of result is "+join.count())
+    println("Hash number of result is " + join.count())
 
     sc.stop()
   }

@@ -16,7 +16,7 @@ object POPI {
       (x.substring(0, pos).toLong, x.substring(pos + 1))
     }
 
-    var skew = s_pairs.sample(false, 1).map(x=>(x._1,1)).reduceByKey(_+_).collectAsMap().filter(x=> x._1==1)
+    var skew = s_pairs.sample(false, 1).map(x => (x._1, 1)).reduceByKey(_ + _).collectAsMap().filter(x => x._1 == 1)
 
     val broadCastSkew = sc.broadcast(skew)
     //partition S
@@ -33,7 +33,7 @@ object POPI {
 
     //duplication-based inner joins for r_dup and s_loc
     val broadCastMap = sc.broadcast(r_dup.collectAsMap())
-    var results2 = s_loc.map(x=> (x._1,broadCastMap.value.get(x._1),x._2))
+    var results2 = s_loc.map(x => (x._1, broadCastMap.value.get(x._1), x._2))
 
     println("POPI number of result2 is " + results2.count())
     sc.stop()
